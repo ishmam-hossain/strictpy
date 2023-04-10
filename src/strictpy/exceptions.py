@@ -2,6 +2,10 @@ class TypeMismatchException(Exception):
     ...
 
 
-class KeyWordsArgumentsOnlyException(Exception):
+class PositionalArgumentsNotAllowedException(Exception):
+    ...
+
+
+class MissingAnnotationError(Exception):
     ...
 

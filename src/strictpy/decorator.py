@@ -1,17 +1,18 @@
 import functools
 from typing import Callable
 
-from .helpers import (validate_arguments,
-                      check_type_hints)
+from .helpers import (check_type_hints,
+                      validate_arguments,
+                      get_annotations_of,
+                      validate_func_signature)
 
 
 def strict(_wrapped_func=None,
            *,
            force_return_type_check: bool = True) -> Callable:
     def decorator_strict(func):
-        func_annotations: dict = func.__annotations__
-        return_type_annotation: dict = {'return': func_annotations.pop('return')}
-        parameter_annotations: dict = func_annotations
+        validate_func_signature(func)
+        parameter_annotations, return_type_annotation = get_annotations_of(func)
 
         @functools.wraps(func)
         def wrapper_strict(*args, **kwargs):
