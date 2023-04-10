@@ -1,5 +1,5 @@
-from src.strictpy.exceptions import (KeyWordsArgumentsOnlyException,
-                                     TypeMismatchException)
+from .exceptions import (KeyWordsArgumentsOnlyException,
+                         TypeMismatchException)
 
 
 def validate_arguments(*args: tuple, **_: dict) -> None:

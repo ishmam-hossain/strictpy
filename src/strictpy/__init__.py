@@ -1,1 +1,1 @@
-from src.strictpy.decorator import strict
+from .decorator import strict

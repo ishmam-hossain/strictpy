@@ -1,8 +1,8 @@
 import functools
 from typing import Callable
 
-from src.strictpy.helpers import (validate_arguments,
-                                  check_type_hints)
+from .helpers import (validate_arguments,
+                      check_type_hints)
 
 
 def strict(_wrapped_func=None,
