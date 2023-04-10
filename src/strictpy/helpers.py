@@ -8,7 +8,7 @@ from .exceptions import (TypeMismatchException,
 _EMPTY = inspect._empty
 
 
-def ensure_return_type_hint(func_signature: inspect.Signature):
+def ensure_return_type_hint(func_signature: inspect.Signature) -> None:
     if func_signature.return_annotation is not _EMPTY:
         return
     raise MissingAnnotationError("return type hint cannot be empty.")
@@ -30,7 +30,8 @@ def validate_func_signature(func: Callable) -> None:
 def validate_arguments(*args: tuple, **_: dict) -> None:
     if (positional_args_len := len(args)) > 0:
         raise PositionalArgumentsNotAllowedException(
-            f"Only keyword arguments are expected, {positional_args_len} were passed as positional arguments."
+            f"Only keyword arguments are expected, "
+            f"{positional_args_len} were passed as positional arguments."
         )
 
 
@@ -39,7 +40,7 @@ def check_type_hints(expected: dict, received: dict) -> None:
         if not isinstance(received.get(param), expected_type):
             raise TypeMismatchException(
                 f"Expected type of '{param}' is {expected_type}, "
-                f"returned {type(received.get(param))} instead."
+                f"got {type(received.get(param))} instead."
             )
 
 
