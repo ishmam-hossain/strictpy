@@ -27,7 +27,7 @@ def validate_func_signature(func: Callable) -> None:
     ensure_return_type_hint(func_signature)
 
 
-def validate_arguments(*args: tuple, **_: dict) -> None:
+def validate_func_arguments(*args: tuple, **_: dict) -> None:
     if (positional_args_len := len(args)) > 0:
         raise PositionalArgumentsNotAllowedException(
             f"Only keyword arguments are expected, "
