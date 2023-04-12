@@ -1,8 +1,8 @@
 import inspect
 from typing import Callable, get_type_hints
 
-from .exceptions import (TypeMismatchException,
-                         MissingAnnotationError,
+from .exceptions import (TypeMismatchError,
+                         TypeHintMissingError,
                          PositionalArgumentsNotAllowedException)
 
 _EMPTY = inspect._empty
@@ -11,23 +11,23 @@ _EMPTY = inspect._empty
 def ensure_return_type_hint(func_signature: inspect.Signature) -> None:
     if func_signature.return_annotation is not _EMPTY:
         return
-    raise MissingAnnotationError("return type hint cannot be empty.")
+    raise TypeHintMissingError("return type hint cannot be empty.")
 
 
 def ensure_param_type_hints(func_signature: inspect.Signature) -> None:
     for name in func_signature.parameters:
         if func_signature.parameters[name].annotation is not _EMPTY:
             continue
-        raise MissingAnnotationError(f"parameter type hint cannot be empty for '{name}'")
+        raise TypeHintMissingError(f"parameter type hint cannot be empty for '{name}'")
 
 
-def validate_func_signature(func: Callable) -> None:
-    func_signature = inspect.signature(func)
+def ensure_type_hints_for(decorated_func: Callable) -> None:
+    func_signature = inspect.signature(decorated_func)
     ensure_param_type_hints(func_signature)
     ensure_return_type_hint(func_signature)
 
 
-def validate_func_arguments(*args: tuple, **_: dict) -> None:
+def ensure_keyword_only_arguments(*args: tuple, **_: dict) -> None:
     if (positional_args_len := len(args)) > 0:
         raise PositionalArgumentsNotAllowedException(
             f"Only keyword arguments are expected, "
@@ -35,10 +35,10 @@ def validate_func_arguments(*args: tuple, **_: dict) -> None:
         )
 
 
-def check_type_hints(expected: dict, received: dict) -> None:
+def cross_check_types_of(expected: dict, received: dict) -> None:
     for param, expected_type in expected.items():
         if not isinstance(received.get(param), expected_type):
-            raise TypeMismatchException(
+            raise TypeMismatchError(
                 f"Expected type of '{param}' is {expected_type}, "
                 f"got {type(received.get(param))} instead."
             )
