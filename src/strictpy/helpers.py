@@ -44,8 +44,8 @@ def cross_check_types_of(expected: dict, received: dict) -> None:
             )
 
 
-def get_annotations_of(func: Callable) -> tuple[dict, dict]:
-    func_annotations: dict = get_type_hints(func)
+def get_annotations_of(decorated_func: Callable) -> tuple[dict, dict]:
+    func_annotations: dict = get_type_hints(decorated_func)
     return_type_annotation: dict = {'return': func_annotations.pop('return')}
     parameter_annotations: dict = func_annotations
     return parameter_annotations, return_type_annotation
