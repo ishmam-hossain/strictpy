@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "strictpy"
+version = "0.0.4"
+authors = [
+  { name="Ishmam Hossain", email="ishmam.dev@gmail.com" },
+]
+description = "This is a simple decorator that will allow you to implement strict type checking in your everyday cPython functions based on the type hint of the function parameters."
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/ishmam-hossain/strictpy"
+"Bug Tracker" = "https://github.com/ishmam-hossain/strictpy/issues"
