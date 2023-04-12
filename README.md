@@ -3,7 +3,6 @@ This is a simple decorator that will allow you to implement strict type checking
 
 
 # TODO
-1. handle return type hint missing (Done)
-2. don't allow func w/o hints (Done)
-3. write more tests
-4. 
+1. write more tests
+2. better name functions & variables
+3. 
