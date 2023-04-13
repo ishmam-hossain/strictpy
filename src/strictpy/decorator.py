@@ -10,7 +10,7 @@ from .helpers import (cross_check_types_of,
 def strict(_wrapped_func=None, *,
            force_return_type_check: bool = True) -> Callable:
     def decorator_strict(decorated_func: Callable):
-        ensure_type_hints_for(decorated_func)
+        ensure_type_hints_for(decorated_func, force_return_type_check)
 
         parameter_annotations: dict
         return_type_annotation: dict
