@@ -21,10 +21,11 @@ def ensure_param_type_hints(func_signature: inspect.Signature) -> None:
         raise TypeHintMissingError(f"parameter type hint cannot be empty for '{name}'")
 
 
-def ensure_type_hints_for(decorated_func: Callable) -> None:
+def ensure_type_hints_for(decorated_func: Callable, force_return_type_check: bool) -> None:
     func_signature = inspect.signature(decorated_func)
     ensure_param_type_hints(func_signature)
-    ensure_return_type_hint(func_signature)
+    if force_return_type_check:
+        ensure_return_type_hint(func_signature)
 
 
 def ensure_keyword_only_arguments(*args: tuple, **_: dict) -> None:
@@ -46,6 +47,6 @@ def cross_check_types_of(expected: dict, received: dict) -> None:
 
 def get_annotations_of(decorated_func: Callable) -> tuple[dict, dict]:
     func_annotations: dict = get_type_hints(decorated_func)
-    return_type_annotation: dict = {'return': func_annotations.pop('return')}
+    return_type_annotation: dict = {'return': func_annotations.pop('return', None)}
     parameter_annotations: dict = func_annotations
     return parameter_annotations, return_type_annotation
