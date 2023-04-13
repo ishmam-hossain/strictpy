@@ -3,6 +3,8 @@
       <img src="assets/strictpy_logo.png" />
     </p>
     <h1>Strictpy</h1>
+    
+    [![Publish to PyPi](https://github.com/ishmam-hossain/strictpy/actions/workflows/pypi-publish.yml/badge.svg)](https://github.com/ishmam-hossain/strictpy/actions/workflows/pypi-publish.yml)
 </div>
 
 This library provides a simple decorator that allows you to enforce strict type 
